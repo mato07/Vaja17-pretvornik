@@ -29,8 +29,26 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        return self.render_template("hello.html")
+        return self.render_template("vnesi.html")
+
+class LoginHandler(BaseHandler):
+    def post(self):
+
+        if self.request.get("pretvorba") == "1":
+            rezultat = float(self.request.get("raz"))*1.6
+        else:
+            rezultat = float(self.request.get("raz")) / 1.6
+
+        podatki = {"znak": self.request.get("pretvorba"),
+                   "rez": rezultat,
+                   "razd": self.request.get("raz")}
+        return self.render_template("pokazi.html", podatki)
+
+        #return self.write("Uspesen post request " + self.request.get("ime") +
+         #                 "Tvoj priimek je: " + self.request.get("priimek"))
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
+    webapp2.Route('/rezultat', LoginHandler)
+
 ], debug=True)

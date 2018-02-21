@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-    <h1>Hello, SmartNinja!</h1>
+    {% if znak == 1 %}
+        <p>{{ razd }} kilometrov znasa {{ rez }} milj</p>
+    {% else %}
+        <p>{{ razd }} milj znasa {{ rez }} kilometrov</p>
+    {% endif %}
 </body>
 </html>
